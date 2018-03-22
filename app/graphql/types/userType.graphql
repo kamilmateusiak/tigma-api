@@ -1,0 +1,17 @@
+type User {
+  ID: ID!
+  display_name: String!
+  user_login: String!
+  user_nicename: String!
+  user_email: String!
+  user_registered: DateTime
+  timetracks: [Timetrack]
+  projects: [Project]
+  tasks: [Task]
+}
+
+type Query {
+  users: [User]
+  user(id: ID!): User
+  me: User
+}

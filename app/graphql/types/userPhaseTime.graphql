@@ -1,0 +1,5 @@
+type UserPhaseTime {
+  ID: Int
+  display_name: String
+  time: Int
+}

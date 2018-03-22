@@ -1,0 +1,25 @@
+type ProjectPhase {
+  project_phase_id: ID!
+  project_id: Int
+  phase_name: String!
+  description: String!
+  phase_state: String!
+  phase_start: DateTime
+  phase_end: DateTime
+  jira_sprint_id: Int
+  token: String
+  closed: Int
+  closed_by: Int
+  closed_date: DateTime
+  closed_by_user: User
+  project: Project
+  time: Int
+  timetracks: [Timetrack]
+  tasks: [Task]
+  users_time: [UserPhaseTime]
+}
+
+type Query {
+  projectPhases(state: String!): [ProjectPhase]
+  projectPhasesWithTimetracks(state: String!): [ProjectPhase]
+}

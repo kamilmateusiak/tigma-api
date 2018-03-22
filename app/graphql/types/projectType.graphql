@@ -1,0 +1,19 @@
+type Project {
+  project_id: ID!
+  project_number: String
+  project_name: String!
+  project_status: String!
+  project_slug: String!
+  create_date: DateTime
+  project_type: String
+  project_subtype_id: Int
+  sticky: Int
+  jira_project_id: Int
+  project_phases: [ProjectPhase]
+  users_time: [UserPhaseTime]
+}
+
+type Query {
+  projects: [Project]
+  project(project_slug: String): Project
+}
