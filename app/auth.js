@@ -14,7 +14,7 @@ const createTokens = async (user, secret, secret2) => {
   const createRefreshToken = jwt.sign(
     { user: _.pick(user, 'ID') },
     secret2,
-    { expiresIn: '1d' }
+    { expiresIn: '7d' }
   );
 
   return Promise.all([createToken, createRefreshToken]);

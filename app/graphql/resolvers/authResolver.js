@@ -8,7 +8,7 @@ module.exports = {
   Mutation: {
     login: async (parent, { email, password }, { SECRET, SECRET_2, res }) => {
       const { token, refreshToken } = await tryLogin(email, password, SECRET, SECRET_2);
-      res.cookie('token', token, { maxAge: 60 * 60 * 24 * 7,
+      res.cookie('token', token, { maxAge: 60 * 60 * 24,
         // httpOnly: true
       });
       res.cookie('refresh-token', refreshToken, { maxAge: 60 * 60 * 24 * 7,
