@@ -65,6 +65,26 @@ module.exports = {
       // not logged in user
       return null;
     }),
+    summary: requiresAuth.createResolver(async (parent, args, { user }, info) => {
+      if (user) {
+        let query = {
+          where: {ID: user.ID},
+          include: []
+        }
+        const timetrackSum = await db.sequelize.query(`
+          SELECT
+            SUM(TIMESTAMPDIFF(SECOND, t.start, t.stop)*1000) as time
+          FROM
+            lamos_timetracks t
+          WHERE
+            t.user_id = ${user.ID} AND MONTH(t.start) = ${new Date().getMonth() + 1}
+          AND
+            YEAR(t.start) = ${new Date().getFullYear()}`);
+
+        return timetrackSum[0][0].time || 0;
+      }
+      return 0;
+    })
   }
 }
 

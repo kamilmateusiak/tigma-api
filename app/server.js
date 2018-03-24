@@ -56,13 +56,12 @@ module.exports = function(app) {
 
   const corsOptions = {
     origin: function (origin, callback) {
-      console.log(origin)
       if (whitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
-        // callback(null, true);
-        console.log('error: CORS problem!')
-        callback(new Error('Not allowed by CORS'));
+        callback(null, true);
+        // console.log('error: CORS problem!')
+        // callback(new Error('Not allowed by CORS'));
       }
     },
     credentials : true
