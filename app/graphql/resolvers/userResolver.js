@@ -71,19 +71,36 @@ module.exports = {
           where: {ID: user.ID},
           include: []
         }
-        const timetrackSum = await db.sequelize.query(`
+        const timetrackMonth = await db.sequelize.query(`
           SELECT
-            SUM(TIMESTAMPDIFF(SECOND, t.start, t.stop)*1000) as time
+            SUM(TIMESTAMPDIFF(SECOND, t.start, t.stop)*1000) as time_month
           FROM
             lamos_timetracks t
           WHERE
             t.user_id = ${user.ID} AND MONTH(t.start) = ${new Date().getMonth() + 1}
           AND
             YEAR(t.start) = ${new Date().getFullYear()}`);
+        const timetrackDay = await db.sequelize.query(`
+          SELECT
+            SUM(TIMESTAMPDIFF(SECOND, t.start, t.stop)*1000) as time_day
+          FROM
+            lamos_timetracks t
+          WHERE
+            t.user_id = ${user.ID} AND MONTH(t.start) = ${new Date().getMonth() + 1}
+          AND
+            YEAR(t.start) = ${new Date().getFullYear()}
+          AND
+            DAY(t.start) = ${new Date().getDate()}`);
 
-        return timetrackSum[0][0].time || 0;
+        return {
+          time_month: timetrackMonth[0][0].time_month || 0,
+          time_day: timetrackDay[0][0].time_day || 0
+        }
       }
-      return 0;
+      return {
+        time_month: 0,
+        time_day: 0
+      };
     })
   }
 }

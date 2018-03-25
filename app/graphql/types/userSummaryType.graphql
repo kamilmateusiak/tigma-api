@@ -1,0 +1,4 @@
+type UserSummary {
+  time_month: Int
+  time_day: Int
+}
