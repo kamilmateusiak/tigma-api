@@ -6,7 +6,8 @@ module.exports = function (sequelize, DataTypes) {
   var Timetrack = sequelize.define('Timetrack', {
     timetrack_id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     start: DataTypes.DATE,
     stop: DataTypes.DATE,

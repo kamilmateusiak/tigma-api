@@ -1,5 +1,5 @@
 type Timetrack {
-  timetrack_id: ID!
+  timetrack_id: Int!
   start: DateTime
   stop: DateTime
   user_id: Int
@@ -15,4 +15,9 @@ type Timetrack {
 
 type Query {
   currentTrack: Timetrack
+}
+
+type Mutation {
+  stopTrack: Boolean
+  startTrack(description: String!, project_id: Int!): Timetrack
 }

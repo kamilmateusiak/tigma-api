@@ -1,5 +1,5 @@
 type Project {
-  project_id: ID!
+  project_id: Int!
   project_number: String
   project_name: String!
   project_status: String!
